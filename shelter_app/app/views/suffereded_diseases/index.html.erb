@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Suffereded Diseases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Started at</th>
+      <th>Discharged</th>
+      <th>Disease</th>
+      <th>Medical history</th>
+      <th>Veterinary</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @suffereded_diseases.each do |suffereded_disease| %>
+      <tr>
+        <td><%= suffereded_disease.started_at %></td>
+        <td><%= suffereded_disease.discharged %></td>
+        <td><%= suffereded_disease.disease_id %></td>
+        <td><%= suffereded_disease.medical_history_id %></td>
+        <td><%= suffereded_disease.veterinary_id %></td>
+        <td><%= link_to 'Show', suffereded_disease %></td>
+        <td><%= link_to 'Edit', edit_suffereded_disease_path(suffereded_disease) %></td>
+        <td><%= link_to 'Destroy', suffereded_disease, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Suffereded Disease', new_suffereded_disease_path %>

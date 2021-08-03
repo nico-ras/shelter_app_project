@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Started at:</strong>
+  <%= @suffereded_disease.started_at %>
+</p>
+
+<p>
+  <strong>Discharged:</strong>
+  <%= @suffereded_disease.discharged %>
+</p>
+
+<p>
+  <strong>Disease:</strong>
+  <%= @suffereded_disease.disease_id %>
+</p>
+
+<p>
+  <strong>Medical history:</strong>
+  <%= @suffereded_disease.medical_history_id %>
+</p>
+
+<p>
+  <strong>Veterinary:</strong>
+  <%= @suffereded_disease.veterinary_id %>
+</p>
+
+<%= link_to 'Edit', edit_suffereded_disease_path(@suffereded_disease) %> |
+<%= link_to 'Back', suffereded_diseases_path %>

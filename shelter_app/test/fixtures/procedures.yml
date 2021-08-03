@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2021-08-03
+  note: MyText
+  done: false
+  treatment: one
+
+two:
+  date: 2021-08-03
+  note: MyText
+  done: false
+  treatment: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_29_050715) do
+ActiveRecord::Schema.define(version: 2021_08_03_035909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,27 @@ ActiveRecord::Schema.define(version: 2021_07_29_050715) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "animals", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "age"
+    t.integer "sex"
+    t.string "color"
+    t.date "entry_at", null: false
+    t.integer "condition"
+    t.integer "personality"
+    t.integer "chip"
+    t.string "hosted_in"
+    t.text "observations"
+    t.bigint "shelter_id", null: false
+    t.bigint "rescued_from_id", null: false
+    t.bigint "adopter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["adopter_id"], name: "index_animals_on_adopter_id"
+    t.index ["rescued_from_id"], name: "index_animals_on_rescued_from_id"
+    t.index ["shelter_id"], name: "index_animals_on_shelter_id"
+  end
+
   create_table "diseases", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -39,6 +60,71 @@ ActiveRecord::Schema.define(version: 2021_07_29_050715) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "medical_histories", force: :cascade do |t|
+    t.bigint "animal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id"], name: "index_medical_histories_on_animal_id"
+  end
+
+  create_table "procedures", force: :cascade do |t|
+    t.date "date", null: false
+    t.text "note"
+    t.boolean "done", default: false
+    t.bigint "treatment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["treatment_id"], name: "index_procedures_on_treatment_id"
+  end
+
+  create_table "rescued_froms", force: :cascade do |t|
+    t.date "date"
+    t.string "address"
+    t.text "observations"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_rescued_froms_on_location_id"
+  end
+
+  create_table "shelters", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suffereded_diseases", force: :cascade do |t|
+    t.date "started_at"
+    t.boolean "discharged", default: false
+    t.bigint "disease_id", null: false
+    t.bigint "medical_history_id", null: false
+    t.bigint "veterinary_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["disease_id"], name: "index_suffereded_diseases_on_disease_id"
+    t.index ["medical_history_id"], name: "index_suffereded_diseases_on_medical_history_id"
+    t.index ["veterinary_id"], name: "index_suffereded_diseases_on_veterinary_id"
+  end
+
+  create_table "treatments", force: :cascade do |t|
+    t.string "type", null: false
+    t.text "observation"
+    t.integer "cost"
+    t.bigint "suffereded_disease_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["suffereded_disease_id"], name: "index_treatments_on_suffereded_disease_id"
+  end
+
+  create_table "vet_charges", force: :cascade do |t|
+    t.bigint "veterinary_id", null: false
+    t.bigint "shelter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shelter_id"], name: "index_vet_charges_on_shelter_id"
+    t.index ["veterinary_id"], name: "index_vet_charges_on_veterinary_id"
+  end
+
   create_table "veterinaries", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -46,4 +132,16 @@ ActiveRecord::Schema.define(version: 2021_07_29_050715) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "animals", "adopters"
+  add_foreign_key "animals", "rescued_froms"
+  add_foreign_key "animals", "shelters"
+  add_foreign_key "medical_histories", "animals"
+  add_foreign_key "procedures", "treatments"
+  add_foreign_key "rescued_froms", "locations"
+  add_foreign_key "suffereded_diseases", "diseases"
+  add_foreign_key "suffereded_diseases", "medical_histories"
+  add_foreign_key "suffereded_diseases", "veterinaries"
+  add_foreign_key "treatments", "suffereded_diseases"
+  add_foreign_key "vet_charges", "shelters"
+  add_foreign_key "vet_charges", "veterinaries"
 end

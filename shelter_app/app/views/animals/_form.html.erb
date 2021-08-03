@@ -1,0 +1,82 @@
+<%= form_with(model: animal) do |form| %>
+  <% if animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+        <% animal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entry_at %>
+    <%= form.date_select :entry_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condition %>
+    <%= form.select :condition, @conditions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :personality %>
+    <%= form.select :personality, @personalities%>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex %>
+    <%= form.select :sex, @sexes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :chip %>
+    <%= form.number_field :chip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hosted_in %>
+    <%= form.text_field :hosted_in %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observations %>
+    <%= form.text_area :observations %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shelter_id %>
+    <%= form.text_field :shelter_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rescued_from_id %>
+    <%= form.text_field :rescued_from_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adopter_id %>
+    <%= form.text_field :adopter_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

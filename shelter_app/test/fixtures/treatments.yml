@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  observation: MyText
+  cost: 1
+  suffereded_disease: one
+
+two:
+  type: 
+  observation: MyText
+  cost: 1
+  suffereded_disease: two
