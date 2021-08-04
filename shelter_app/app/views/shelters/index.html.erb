@@ -17,11 +17,14 @@
         <td><%= link_to 'Show', shelter %></td>
         <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
         <td><%= link_to 'Destroy', shelter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=  link_to 'Animals' , shelter_animals_path(shelter) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+
+
 
 <%= link_to 'New Shelter', new_shelter_path %>

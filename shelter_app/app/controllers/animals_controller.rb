@@ -1,6 +1,8 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[ show edit update destroy ]
-  before_action :set_personalities, :set_conditions, :set_sexes,  only: %i[new edit]
+  before_action :set_personalities, :set_conditions, :set_sexes, only: %i[new edit]
+  before_action :set_conditions, :set_personalities, :set_sexes
+  before_action :set_shelter, only: %i[index new create]
   # GET /animals or /animals.json
   def index
     @animals = Animal.all
@@ -12,7 +14,7 @@ class AnimalsController < ApplicationController
 
   # GET /animals/new
   def new
-    @animal = Animal.new
+    @animal = @shelter.animals.build
   end
 
   # GET /animals/1/edit
@@ -21,12 +23,12 @@ class AnimalsController < ApplicationController
 
   # POST /animals or /animals.json
   def create
-    @animal = Animal.new(animal_params)
+    @animal = @shelter.animals.build(animal_params)
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal, notice: "Animal was successfully created." }
-        format.json { render :show, status: :created, location: @animal }
+        format.html { redirect_to [@shelter, @animal], notice: "Animal was successfully created." }
+        format.json { render :show, status: :created, location: [@shelter, @animal] }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @animal.errors, status: :unprocessable_entity }
@@ -73,6 +75,10 @@ class AnimalsController < ApplicationController
     def set_sexes
       @sexes = Animal.sexes.map { |k,v| [k,k] }
     end
+
+    def set_shelter
+      @shelter = Shelter.find(params[:shelter_id])
+    end  
 
     # Only allow a list of trusted parameters through.
     def animal_params
