@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   
   
-  
+  resources :homes
   resources :shelters do
     resources :animals
     resources :adopters
@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   
   
   
-  root 'shelters#index'
+  root 'homes#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
