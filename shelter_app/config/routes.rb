@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   
   
   
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   resources :homes
   resources :shelters do
     resources :animals
@@ -16,9 +19,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :rescued_froms
   end  
-  
-  
-  
+
   
   root 'homes#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
