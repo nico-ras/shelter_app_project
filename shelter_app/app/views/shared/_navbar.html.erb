@@ -12,11 +12,19 @@
             My account
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <% unless user_signed_in? %>
-            <li><%= link_to "Register", new_user_registration_path %></li>
-            <li><%= link_to "Sign in", new_user_session_path %></li>
+            
+
+            <% if current_user %>
+               <% if current_user.admin? %>
+                  <li><%= link_to "Add new user", new_user_registration_path %></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+               <% else %> 
+                  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li> 
+               <% end %>      
+
             <% else  %>
-            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+            
             <% end %>
           </ul>
         </li>
