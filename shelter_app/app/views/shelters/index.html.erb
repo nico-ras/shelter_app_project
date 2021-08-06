@@ -2,36 +2,9 @@
 
 <h1>Mi refugio</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Total rescatados</th>
-      <th>Adoptados</th>
-      <th>En refugio</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= render 'shelters', shelters: @shelters %>
 
-  <tbody>
-    <% @shelters.each do |shelter| %>
-      <tr>
-        <td><%= shelter.name %></td>
-        <td><%= shelter.animals.count %></td>
-        <td><%= shelter.animals.where(adopter_id: true).count %></td>
-        <td><%= shelter.animals.where(adopter_id: false).count %></td>
-        <td><%= link_to 'Show', shelter %></td>
-        <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
-        <td><%= link_to 'Destroy', shelter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%=  link_to 'Animals' , shelter_animals_path(shelter) %></td>
 
-        <p>
-  
-
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
