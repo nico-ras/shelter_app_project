@@ -3,6 +3,7 @@
 
 <%  if user_signed_in? %>
 entraste!!
+<%= render 'shelters/shelters', shelters: @shelters %>
 <% else %>
 debes entrar!
 <%  end %>
