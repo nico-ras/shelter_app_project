@@ -52,18 +52,28 @@
 
 <p>
   <strong>Shelter:</strong>
-  <%= @animal.shelter_id %>
+  <%= @animal.shelter.name %>
 </p>
 
 <p>
   <strong>Rescued from:</strong>
-  <%= @animal.rescued_from_id %>
+  <%= @animal.rescued_from.address %>, <%= @animal.rescued_from.location.county %>
 </p>
+
+<% if @animal.adopter %>
 
 <p>
   <strong>Adopter:</strong>
-  <%= @animal.adopter_id %>
+  <%= @animal.adopter.name %>, ID: <%= @animal.adopter_id %>  <%= link_to 'Ver adoptante', adopter_path(@animal.adopter_id) %>
 </p>
+<% else %>
 
-<%= link_to 'Edit', edit_animal_path(@animal) %> |
-<%= link_to 'Back', animals_path %>
+ <p>
+   <strong>Adopter: </strong>
+   En refugio
+ </p>
+
+<% end %>
+
+<%= link_to 'Edit', edit_animal_path %> |
+<%= link_to 'Back', shelter_animals_path(@animal.shelter_id) %>

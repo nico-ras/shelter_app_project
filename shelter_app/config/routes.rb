@@ -10,18 +10,35 @@ Rails.application.routes.draw do
   
 
   resources :homes
-  resources :shelters do
-    resources :animals
-    resources :adopters
-    resources :veterinaries
-    resources :medical_histories
-    resources :diseases
-    resources :suffereded_diseases
-    resources :treatments
-    resources :procedures
-    resources :locations
-    resources :rescued_froms
-  end  
+
+  shallow do
+    resources :shelters do
+      resources :animals 
+      resources :adopters
+      resources :veterinaries
+    end
+    
+    
+
+    resources :treatments do
+        resources :procedures
+    end
+    
+    
+
+  end 
+  
+  resources :locations
+    
+  resources :rescued_froms 
+  
+  resources :suffereded_diseases 
+    
+  resources :medical_histories 
+
+  resources :diseases
+     
+   
 
   
   root 'homes#index'

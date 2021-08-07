@@ -3,4 +3,4 @@
 <%= render 'form', animal: @animal %>
 
 <%= link_to 'Show', @animal %> |
-<%= link_to 'Back', animals_path %>
+<%= link_to 'Back', shelter_animals_path(@animal.shelter_id) %>

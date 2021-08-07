@@ -8,6 +8,8 @@ class SheltersController < ApplicationController
 
   # GET /shelters/1 or /shelters/1.json
   def show
+
+  
   end
 
   # GET /shelters/new
@@ -66,4 +68,6 @@ class SheltersController < ApplicationController
     def shelter_params
       params.require(:shelter).permit(:name)
     end
+
+
 end

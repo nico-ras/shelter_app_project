@@ -5,4 +5,5 @@ class Shelter < ApplicationRecord
     has_many :volunteerings
     has_many :users, through: :volunteerings, dependent: :destroy
 
+    
 end

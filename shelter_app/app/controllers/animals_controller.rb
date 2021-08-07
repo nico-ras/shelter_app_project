@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[ show edit update destroy ]
   before_action :set_personalities, :set_conditions, :set_sexes, only: %i[new edit]
   before_action :set_conditions, :set_personalities, :set_sexes
-  before_action :set_shelter, only: %i[index new create]
+  before_action :set_shelter, only: %i[new create delete]
   # GET /animals or /animals.json
   def index
     @animals = Animal.all
