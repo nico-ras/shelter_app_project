@@ -2,10 +2,12 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[ show edit update destroy ]
   before_action :set_personalities, :set_conditions, :set_sexes, only: %i[new edit]
   before_action :set_conditions, :set_personalities, :set_sexes
-  before_action :set_shelter, only: %i[new create delete]
+  before_action :set_shelter, only: %i[ index new create delete]
   # GET /animals or /animals.json
   def index
     @animals = Animal.all
+    @animal = @shelter.animals.build
+
   end
 
   # GET /animals/1 or /animals/1.json
@@ -29,6 +31,7 @@ class AnimalsController < ApplicationController
       if @animal.save
         format.html { redirect_to [@shelter, @animal], notice: "Animal was successfully created." }
         format.json { render :show, status: :created, location: [@shelter, @animal] }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @animal.errors, status: :unprocessable_entity }

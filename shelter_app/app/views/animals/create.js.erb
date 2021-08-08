@@ -1,0 +1,31 @@
+var table = document.querySelector('table#animals tbody')
+var new_tr = document.createElement('tr')
+var animal_content = '<%= j render "animal_detail", animal: @animal%>'
+
+new_tr.innerHTML = animal_content
+table.appendChild(new_tr)
+
+var input_name = document.querySelector('[name="animal[name]"]')
+input_name.value = ''
+var input_condition = document.querySelector('[name="animal[condition]"]')
+input_condition.value = ''
+var input_age = document.querySelector('[name="animal[age]"]')
+input_age.value = ''
+var input_personality = document.querySelector('[name="animal[personality]"]')
+input_personality.value = ''
+var input_sex = document.querySelector('[name="animal[sex]"]')
+input_sex.value = ''
+var input_color = document.querySelector('[name="animal[color]"]')
+input_color.value = ''
+var input_chip = document.querySelector('[name="animal[chip]"]')
+input_chip.value = ''
+var input_hosted_in = document.querySelector('[name="animal[hosted_in]"]')
+input_hosted_in.value = ''
+var input_observations = document.querySelector('[name="animal[observations]"]')
+input_observations.value = ''
+var input_shelter = document.querySelector('[name="animal[shelter_id]"]')
+input_shelter.value = ''
+var input_rescued_from = document.querySelector('[name="animal[rescued_from_id]"]')
+input_rescued_from.value = ''
+var input_adopter = document.querySelector('[name="animal[adopter_id]"]')
+input_adopter.value = ''

@@ -1,0 +1,20 @@
+        <td><%= animal.name %></td>
+        <td><%= animal.entry_at %></td>
+        <td><%= animal.condition %></td>
+        <td><%= animal.personality %></td>
+        <td><%= animal.age %></td>
+        <td><%= animal.sex %></td>
+        <td><%= animal.color %></td>
+        <td><%= animal.chip %></td>
+        <td><%= animal.hosted_in %></td>
+        <td><%= animal.observations %></td>
+        <td><%= animal.shelter.name %></td>
+        <td><%= animal.rescued_from.address %></td>
+        <% if animal.adopter %>
+          <td><%= animal.adopter.name %></td>
+        <% else %>
+           <td><p>en refugio</p></td>
+        <% end %>
+        <td><%= link_to 'Show', animal %></td>
+        <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
+        <td><%= link_to 'Destroy',  animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

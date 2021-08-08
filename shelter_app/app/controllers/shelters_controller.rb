@@ -29,6 +29,7 @@ class SheltersController < ApplicationController
       if @shelter.save
         format.html { redirect_to @shelter, notice: "Shelter was successfully created." }
         format.json { render :show, status: :created, location: @shelter }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @shelter.errors, status: :unprocessable_entity }

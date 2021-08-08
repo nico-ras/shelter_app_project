@@ -15,7 +15,7 @@
         <td><%= shelter.name %></td>
         <td><%= shelter.animals.count %></td>
         <td><%= shelter.animals.where(adopter_id: true).count %></td>
-        <td><%= shelter.animals.where(adopter_id: false).count %></td>
+        <td><%= shelter.animals.where(adopter_id: nil).count %></td>
         <td><%= link_to 'Show', shelter %></td>
         <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
         <td><%= link_to 'Destroy', shelter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
