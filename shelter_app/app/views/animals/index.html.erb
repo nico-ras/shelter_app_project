@@ -2,7 +2,11 @@
 
 <h1>Animals</h1>
 
-<%= render 'form', animal: @animal %>
+<%= link_to 'New Animal', new_shelter_animal_path, remote: true %>
+
+<div id='animal_form_div'>
+</div>
+
 
 <table id='animals'>
   <thead>
@@ -25,12 +29,14 @@
   </thead>
 
   <tbody>
+  
     <% @animals.each do |animal| %>
       <%= render 'animal', animal: animal %>
     <% end %>
+   
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Animal', new_shelter_animal_path %>
+

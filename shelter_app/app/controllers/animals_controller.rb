@@ -5,7 +5,7 @@ class AnimalsController < ApplicationController
   before_action :set_shelter, only: %i[ index new create delete]
   # GET /animals or /animals.json
   def index
-    @animals = Animal.all
+    @animals = @shelter.animals.where.not(name: nil)
     @animal = @shelter.animals.build
 
   end
@@ -17,6 +17,8 @@ class AnimalsController < ApplicationController
   # GET /animals/new
   def new
     @animal = @shelter.animals.build
+    
+    
   end
 
   # GET /animals/1/edit
