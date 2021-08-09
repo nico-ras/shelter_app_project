@@ -13,8 +13,9 @@ Rails.application.routes.draw do
 
   shallow do
     resources :shelters do
-      resources :animals 
-      resources :adopters
+      resources :animals do
+        resources :adopters
+      end  
       resources :veterinaries
     end
     

@@ -1,0 +1,10 @@
+var div = document.querySelector('div#animal_show')
+
+var animal_show = '<%= j render "animals/show", animal: @animal%>'
+
+div.innerHTML = animal_show
+
+var adopter_form_div = document.querySelector('div#adopter_form_div')
+adopter_form_div.innerHTML = ''
+
+

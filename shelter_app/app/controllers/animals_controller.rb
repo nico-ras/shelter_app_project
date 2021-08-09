@@ -12,6 +12,8 @@ class AnimalsController < ApplicationController
 
   # GET /animals/1 or /animals/1.json
   def show
+    @adopter = Adopter.new
+    @shelter = @animal.shelter
   end
 
   # GET /animals/new

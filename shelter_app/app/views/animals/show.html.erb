@@ -1,79 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @animal.name %>
-</p>
+<div id='animal_show'>
 
-<p>
-  <strong>Entry at:</strong>
-  <%= @animal.entry_at %>
-</p>
+   <%= render 'show', animal: @animal %>
 
-<p>
-  <strong>Condition:</strong>
-  <%= @animal.condition %>
-</p>
+</div>
 
-<p>
-  <strong>Personality:</strong>
-  <%= @animal.personality %>
-</p>
 
-<p>
-  <strong>Age:</strong>
-  <%= @animal.age %>
-</p>
 
-<p>
-  <strong>Sex:</strong>
-  <%= @animal.sex %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @animal.color %>
-</p>
-
-<p>
-  <strong>Chip:</strong>
-  <%= @animal.chip %>
-</p>
-
-<p>
-  <strong>Hosted in:</strong>
-  <%= @animal.hosted_in %>
-</p>
-
-<p>
-  <strong>Observations:</strong>
-  <%= @animal.observations %>
-</p>
-
-<p>
-  <strong>Shelter:</strong>
-  <%= @animal.shelter.name %>
-</p>
-
-<p>
-  <strong>Rescued from:</strong>
-  <%= @animal.rescued_from.address %>, <%= @animal.rescued_from.location.county %>
-</p>
-
-<% if @animal.adopter %>
-
-<p>
-  <strong>Adopter:</strong>
-  <%= @animal.adopter.name %>, ID: <%= @animal.adopter_id %>  <%= link_to 'Ver adoptante', adopter_path(@animal.adopter_id) %>
-</p>
-<% else %>
-
- <p>
-   <strong>Adopter: </strong>
-   En refugio
- </p>
-
-<% end %>
+<div id='adopter_form_div'></div>
 
 <%= link_to 'Edit', edit_animal_path %> |
 <%= link_to 'Back', shelter_animals_path(@animal.shelter_id) %>
