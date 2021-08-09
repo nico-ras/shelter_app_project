@@ -4,6 +4,7 @@ class SheltersController < ApplicationController
   # GET /shelters or /shelters.json
   def index
     @shelters = Shelter.all
+    
   end
 
   # GET /shelters/1 or /shelters/1.json

@@ -1,4 +1,4 @@
-<%= form_with(model: shelter) do |form| %>
+<%= form_with(model: shelter, class: 'shelters_form') do |form| %>
   <% if shelter.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(shelter.errors.count, "error") %> prohibited this shelter from being saved:</h2>

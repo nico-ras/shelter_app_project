@@ -8,11 +8,22 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import shelters_create from '../src/shelters_create'
+
 
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+document.addEventListener('submit', function(e) {
+    if (e.target.matches('.shelters_form')) {
+        e.preventDefault()
+        shelters_create(e)
+    }
+})
+
 
 
 
