@@ -25,7 +25,7 @@ class SheltersController < ApplicationController
   # POST /shelters or /shelters.json
   def create
     @shelter = Shelter.new(shelter_params)
-
+    
     respond_to do |format|
       if @shelter.save
         format.html { redirect_to @shelter, notice: "Shelter was successfully created." }

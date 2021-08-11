@@ -10,12 +10,12 @@
   </thead>
 
   <tbody>
-    <% @shelters.each do |shelter| %>
+    <!--<% @shelters.each do |shelter| %>
       <tr>
         <td><%= shelter.name %></td>
         <td><%= shelter.animals.count %></td>
-        <td><%= shelter.animals.where(adopter_id: true).count %></td>
-        <td><%= shelter.animals.where(adopter_id: nil).count %></td>
+        <td><%= shelter.animals.adopted.count %></td>
+        <td><%= shelter.animals.not_adopted.count %></td>
         <td><%= link_to 'Show', shelter %></td>
         <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
         <td><%= link_to 'Destroy', shelter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,7 +25,7 @@
   
 
       </tr>
-    <% end %>
+    <% end %>-->
   </tbody>
 </table>
 

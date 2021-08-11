@@ -1,4 +1,4 @@
-import Shelter from './shelters_shelter.js'
+import Shelter from './shelter.js'
 
 function shelters_create(e) {
       
@@ -21,6 +21,7 @@ function shelters_create(e) {
         })
         .then(data => data.json())
         .then(shelter => {
+            console.log(shelter)
             const tr = Shelter(shelter)
             document.querySelector('#shelters tbody').appendChild(tr)
             document.querySelector('[type="submit"]').disabled = false
