@@ -14,30 +14,33 @@ Rails.application.routes.draw do
   shallow do
     resources :shelters do
       resources :animals do
+        resources :rescued_froms
         resources :adopters
+        resources :medical_histories do
+          resources :suffereded_diseases do
+            resources :treatments do
+              resources :procedures
+          end
+          end
+        end
       end  
       resources :veterinaries
+      
+      
     end
-    
-    
-
-    resources :treatments do
-        resources :procedures
-    end
-    
-    
-
+    resources :diseases
+    resources :locations
   end 
   
-  resources :locations
-    
-  resources :rescued_froms 
   
-  resources :suffereded_diseases 
     
-  resources :medical_histories 
+  
+  
+   
+    
+   
 
-  resources :diseases
+  
      
    
 
