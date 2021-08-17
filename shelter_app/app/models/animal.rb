@@ -17,6 +17,12 @@ class Animal < ApplicationRecord
 
   scope :adopted, -> { where(adopter_id: true)}
   scope :not_adopted, -> { where(adopter_id: nil)}
+  
+
+  ransacker :id do
+    Arel.sql("to_char(\"#{table_name}\".\"id\", '99999')")
+  end
 
   
+
 end

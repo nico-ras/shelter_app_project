@@ -7,11 +7,30 @@
 <div id='animal_form_div'>
 </div>
 
+<div>
+   <%= search_form_for @q, url: shelter_animals_path(@shelter) do |f| %>
+    <div>
+      <%= f.label :name_or_id_cont %>
+      <%= f.search_field :name_or_id_cont %>
+      
+    </div>  
+
+    <div class="form-group">
+      <%= f.label :personality_eq, "Personality" %>
+      <%= f.select :personality_eq, options_for_select(Animal.personalities ,@q.personality_eq), {},{class: "form-control"} %>
+</div>
+
+<%= f.submit %>
+   <% end %>
+</div>
+
+
 
 <table id='animals'>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Id</th>
       <th>Entry at</th>
       <th>Condition</th>
       <th>Personality</th>
