@@ -17,6 +17,7 @@ import shelters_update from '../src/shelters/update'
 
 
 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

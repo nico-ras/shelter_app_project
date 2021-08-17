@@ -4,6 +4,12 @@
 <%  if user_signed_in? %>
 <h2>Bienvenido a shelter app</h2>
 
+<div>
+    <div class="fact_api"></div>
+    <%= button_tag "More facts", class: "more_facts", data: { disable_with: "Please wait..." } %>
+</div>
+
+
 <div class="mid-size">
 <p>Nuevo refugio</p>
      <%= render 'shelters/form', shelter: @shelter %>
