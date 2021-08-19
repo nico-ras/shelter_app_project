@@ -6,7 +6,7 @@ class AnimalsController < ApplicationController
   # GET /animals or /animals.json
   def index
     @q = @shelter.animals.where.not(name: nil).ransack(params[:q])
-    @animals = @q.result(distinct: true)
+    @animals = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 5)
     @animal = @shelter.animals.build
 
   end

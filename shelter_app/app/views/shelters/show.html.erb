@@ -31,10 +31,19 @@
 
 
 <div>
+    <p>Shelter animals personalities</p>
+    <%= pie_chart @shelter.animals.group(:personality).count %>
 
 </div>
 
 <div>
+   <p>Shelter animals conditions</p>
+   <%= pie_chart @shelter.animals.group(:condition).count %>
+
+</div>
+
+<div>
+   <%= line_chart @shelter.animals.group_by_day(:created_at).count %>
 </div>
 
 <%= link_to 'Edit', edit_shelter_path(@shelter) %> |

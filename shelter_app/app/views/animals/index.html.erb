@@ -17,7 +17,7 @@
 
     <div class="form-group">
       <%= f.label :personality_eq, "Personality" %>
-      <%= f.select :personality_eq, options_for_select(Animal.personalities ,@q.personality_eq), {},{class: "form-control"} %>
+      <%= f.select :personality_eq, options_for_select(Animal.personalities ,@q.personality_eq), {:include_blank => true},{class: "form-control"} %>
 </div>
 
 <%= f.submit %>
@@ -52,6 +52,8 @@
     <% @animals.each do |animal| %>
       <%= render 'animal', animal: animal %>
     <% end %>
+
+    <%= will_paginate @animals %>
    
   </tbody>
 </table>
