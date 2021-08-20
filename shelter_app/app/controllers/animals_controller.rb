@@ -3,6 +3,7 @@ class AnimalsController < ApplicationController
   before_action :set_personalities, :set_conditions, :set_sexes, only: %i[new edit]
   before_action :set_conditions, :set_personalities, :set_sexes
   before_action :set_shelter, only: %i[ index new create delete]
+  before_action :editor_user, only: %i[ update destroy create ]
   # GET /animals or /animals.json
   def index
     @q = @shelter.animals.where.not(name: nil).ransack(params[:q])
@@ -86,7 +87,11 @@ class AnimalsController < ApplicationController
 
     def set_shelter
       @shelter = Shelter.find(params[:shelter_id])
-    end  
+    end
+    
+    def editor_user
+      redirect_to homes_path unless current_user.editor?
+    end
 
     # Only allow a list of trusted parameters through.
     def animal_params

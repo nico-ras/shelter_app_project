@@ -1,6 +1,8 @@
 class SufferededDiseasesController < ApplicationController
   before_action :set_suffereded_disease, only: %i[ show edit update destroy ]
 
+  before_action :editor_user, only: %i[ update destroy create ]
+
   # GET /suffereded_diseases or /suffereded_diseases.json
   def index
     @suffereded_diseases = SufferededDisease.all
@@ -57,6 +59,10 @@ class SufferededDiseasesController < ApplicationController
   end
 
   private
+
+    def editor_user
+      redirect_to homes_path unless current_user.editor?
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_suffereded_disease
       @suffereded_disease = SufferededDisease.find(params[:id])

@@ -16,7 +16,7 @@ class Animal < ApplicationRecord
 
   scope :ill, -> { where('condition = ?', 1)}
 
-  scope :adopted, -> { where(adopter_id: true)}
+  scope :adopted, -> { where.not(adopter_id: nil)}
   scope :not_adopted, -> { where(adopter_id: nil)}
   
 
