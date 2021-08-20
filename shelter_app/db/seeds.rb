@@ -16,6 +16,8 @@ Location.destroy_all
 Shelter.destroy_all 
 User.destroy_all
 
+#ActiveRecord::Base.connection.reset_pk_sequence!('table_name')
+
 
 users = [{email: 'admin@admin.com', nickname: 'admin', password: 123456, admin: true, editor: true}, {email: 'user2@user.com', nickname: 'user2', password: 123456, admin: false, editor: true}, {email: 'user3@user.com', nickname: 'user3', password: 123456, admin: false, editor: false}, {email: 'user4@user.com', nickname: 'user4', password: 123456, admin: false, editor: false}, {email: 'user5@user.com', nickname: 'user5', password: 123456, admin: false, editor: false}]
 
@@ -53,6 +55,15 @@ end
 
 treatment_types = ['Vacunas', 'Control', 'Medicamentos', 'Examenes']
 
+adopters_ids = []
+
+20.times do 
+    adopter = Adopter.create!(name: Faker::Name.name, dni: rand(8**8).to_s + '-' + rand(1..9).to_s, address: Faker::Address.full_address, phone: rand(10**10).to_s, social_net: ['insta...', 'face..'].sample, observations: Faker::Lorem.paragraph)
+
+     adopters_ids << adopter.id
+
+end    
+
 10.times do
    
     location = Location.create!(county: Faker::Address.community)
@@ -81,7 +92,8 @@ treatment_types = ['Vacunas', 'Control', 'Medicamentos', 'Examenes']
        
             rescued_from = location.rescued_froms.create!(date: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), address: Faker::Address.street_address, observations: Faker::Lorem.paragraph)
     
-            animal = shelter.animals.create!(name: Faker::Creature::Dog.name, age: rand(1..18), sex: rand(0..1), color: Faker::Color.color_name, entry_at: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), condition: rand(0..4), personality: rand(0..2), chip: rand(7**7), hosted_in: 'canil ' + rand(0..10).to_s, observations: Faker::Lorem.paragraph, rescued_from_id: rescued_from.id)
+            animal = shelter.animals.create!(name: Faker::Creature::Dog.name, age: rand(1..18), sex: rand(0..1), color: Faker::Color.color_name, entry_at: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), condition: rand(0..4), personality: rand(0..2), chip: rand(7**7), hosted_in: 'canil ' + rand(0..10).to_s, observations: Faker::Lorem.paragraph, rescued_from_id: rescued_from.id, adopter_id: [nil, nil, adopters_ids.sample].sample)
+
     
             medical_record = MedicalHistory.create!(animal_id: animal.id)
 
@@ -110,6 +122,8 @@ treatment_types = ['Vacunas', 'Control', 'Medicamentos', 'Examenes']
     
 
 end
+
+
     
 
 
