@@ -31,6 +31,8 @@
 
 <br>
 
-
+<% if current_user.editor? %>
 
 <%= link_to 'New Shelter', new_shelter_path %>
+
+<% end %>

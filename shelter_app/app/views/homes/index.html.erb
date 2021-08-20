@@ -9,19 +9,24 @@
     <%= button_tag "More facts", class: "more_facts", data: { disable_with: "Please wait..." } %>
 </div>
 
-
+<% if current_user.editor? %>
 <div class="mid-size">
 <p>Nuevo refugio</p>
      <%= render 'shelters/form', shelter: @shelter %>
 </div>
 
 
+<br>
+
 <div class="mid-size">
      <div id="shelter_edit"></div>
 </div>
 
+<% end %>
+
 <div class="clear"></div>
 
+<br>
 
 <%= render 'shelters/shelters', shelters: @shelters %>
 <% else %>

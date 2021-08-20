@@ -1,5 +1,6 @@
 class SheltersController < ApplicationController
   before_action :set_shelter, only: %i[ show edit update destroy ]
+  before_action :editor_user, only: %i[ update destroy create ]
 
   # GET /shelters or /shelters.json
   def index
@@ -61,6 +62,11 @@ class SheltersController < ApplicationController
   end
 
   private
+
+  def editor_user
+    redirect_to homes_path unless current_user.editor?
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_shelter
       @shelter = Shelter.find(params[:id])

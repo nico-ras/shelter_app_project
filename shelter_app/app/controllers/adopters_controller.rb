@@ -4,6 +4,8 @@ class AdoptersController < ApplicationController
     
     before_action :set_animal, only: %i[ new create ]
 
+    before_action :editor_user, only: %i[ update destroy create ]
+
     def index
         @adopters = Adopter.all
     end
@@ -57,6 +59,10 @@ class AdoptersController < ApplicationController
       end
 
       private
+
+      def editor_user
+        redirect_to homes_path unless current_user.editor?
+      end
 
       def set_adopter
         @adopter = Adopter.find(params[:id])
