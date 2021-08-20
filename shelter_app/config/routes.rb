@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   
   
   
+  get 'locations/index'
+  get 'locations/new'
+  get 'locations/show'
+  get 'locations/create'
+  get 'locations/update'
+  get 'locations/destroy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
