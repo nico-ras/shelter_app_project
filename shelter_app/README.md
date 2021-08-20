@@ -1,25 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# shelter_proyect
 
-Things you may want to cover:
+_Shelter_app is a project that seeks to help animal shelters and organizations, providing management of all relevant information, such as animal registration, adopter registration, disease data, graphics with relevant information, financial management, rescue locations and much more
 
-* Ruby version
+## Starting 🚀
 
-* System dependencies
+_you must first clone the project from github repository to local:
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+#### Prerequisites
 
-* How to run the test suite
+The setups steps expect following tools installed on the system.
 
-* Services (job queues, cache servers, search engines, etc.)
+- Github
+- ruby [2.7.2]
+- Rails [6.1.4]
 
-* Deployment instructions
+#### Check out the repository
+
+```
+$ git clone https://github.com/nico-ras/shelter_app
+```
+
+_create your application’s databases by using the rails command:
+
+```
+$ rails db:create
+
+$ rails db:setup
+```
+
+_Then you must install the gems:
+
+```
+$ bundle install
+```
+
+#### Testing Your Configuration
+
+```
+bundle exec rails s
+```
+
+_And now you can visit the site with the URL http://localhost:3000
+
+
+
 
 * ...
 # shelter_proyect
+
+
