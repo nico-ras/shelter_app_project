@@ -2,6 +2,7 @@ class Animal < ApplicationRecord
   belongs_to :shelter
   belongs_to :rescued_from
   belongs_to :adopter, optional: true
+  has_one :medical_history
 
   enum personality: [ 'sociable', 'domestico', 'feral']
   enum condition: [ 'sano', 'enfermo', 'grave', 'preñada', 'con cachorros']

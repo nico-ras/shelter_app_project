@@ -5,6 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Procedure.destroy_all
+Treatment.destroy_all
+SufferededDisease.destroy_all
+MedicalHistory.destroy_all
 Animal.destroy_all
 Veterinary.destroy_all
 RescuedFrom.destroy_all
@@ -19,35 +23,91 @@ shelter = Shelter.create!(name: 'El Gatil')
 
 veterinaries = [{first_name: 'Sixto', last_name: 'Rodriguez'}, {first_name: 'Robert', last_name: 'Smith'}]
 
+disease_names = ['Otitis', 'Conjuntivitis', 'Rabia', 'Leucemia felina', 'Panleucopenia felina', 'Inmunodeficiencia felina', 'Peritonitis', 'Problemas gastrointestinales']
+
+disease_ids = []
+
+disease_names.each do |d|
+
+    disease = Disease.create!(name: d, description: Faker::Lorem.paragraph)
+
+    disease_ids << disease.id
+
+end    
+
 users.each do |user|
     current_user = shelter.users.create!(email: user[:email], nickname: user[:nickname], password: user[:password], admin: user[:admin], editor: user[:editor])
 
     puts "se ha creado el usuario: #{current_user.email}, con nickname: #{current_user.nickname}"
 end   
 
+vet_ids = []
+
 veterinaries.each do |vet|
     current_vet = shelter.veterinaries.create!(first_name: vet[:first_name],last_name: vet[:last_name])
 
     puts "se ha creado el veterinario: #{current_vet.first_name} #{current_vet.last_name} "
+
+    vet_ids << current_vet.id
 end
 
-20.times do
+treatment_types = ['Vacunas', 'Control', 'Medicamentos', 'Examenes']
+
+10.times do
    
     location = Location.create!(county: Faker::Address.community)
     
     puts "Se ha creado la locacion: #{location.county}"
     
-    
-    10.times do
+    #animales sin historial de enfermedades y sin adoptantes
+
+    # 10.times do
        
-        rescued_from = location.rescued_froms.create!(date: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), address: Faker::Address.street_address, observations: Faker::Lorem.paragraph)
+    #     rescued_from = location.rescued_froms.create!(date: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), address: Faker::Address.street_address, observations: Faker::Lorem.paragraph)
 
-        shelter.animals.create!(name: Faker::Creature::Dog.name, age: rand(1..18), sex: rand(0..1), color: Faker::Color.color_name, entry_at: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), condition: rand(0..4), personality: rand(0..2), chip: rand(10**10), hosted_in: 'canil ' + rand(0..10).to_s, observations: Faker::Lorem.paragraph, rescued_from_id: rescued_from.id)
+    #     animal = shelter.animals.create!(name: Faker::Creature::Dog.name, age: rand(1..18), sex: rand(0..1), color: Faker::Color.color_name, entry_at: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), condition: rand(0..4), personality: rand(0..2), chip: rand(7**7), hosted_in: 'canil ' + rand(0..10).to_s, observations: Faker::Lorem.paragraph, rescued_from_id: rescued_from.id)
 
-        
+    #     medical_record = MedicalHistory.create!(animal_id: animal.id)
 
     
-    end
+    # end
+
+    #animales con historial de enfermedades
+
+    
+
+
+          10.times do
+       
+            rescued_from = location.rescued_froms.create!(date: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), address: Faker::Address.street_address, observations: Faker::Lorem.paragraph)
+    
+            animal = shelter.animals.create!(name: Faker::Creature::Dog.name, age: rand(1..18), sex: rand(0..1), color: Faker::Color.color_name, entry_at: Faker::Date.between_except(from: 3.year.ago, to: 1.year.from_now, excepted: Date.today), condition: rand(0..4), personality: rand(0..2), chip: rand(7**7), hosted_in: 'canil ' + rand(0..10).to_s, observations: Faker::Lorem.paragraph, rescued_from_id: rescued_from.id)
+    
+            medical_record = MedicalHistory.create!(animal_id: animal.id)
+
+               rand(0..2).times do
+
+                  suffereded_disease = medical_record.suffereded_diseases.create!(started_at: Faker::Date.between_except(from: 6.month.ago, to: 6.month.from_now, excepted: Date.today), discharged: [true, false].sample, disease_id: disease_ids.sample, veterinary_id: vet_ids.sample)
+
+                    rand(0..2).times do
+                      treatment = suffereded_disease.treatments.create!(treatment_type: treatment_types.sample, observation: Faker::Lorem.paragraph, cost: rand(100..1000000))
+
+                        rand(0..3).times do
+                            treatment.procedures.create!(date: Faker::Date.between_except(from: 2.month.ago, to: 2.month.from_now, excepted: Date.today), note: Faker::Lorem.paragraph, done: [true, false].sample)
+                        end
+
+                      
+                    end
+
+               end
+    
+    
+    
+        
+        end
+    
+
+    
 
 end
     
@@ -57,26 +117,3 @@ end
 
 
 
-# users = [
-#     { email: 'cristobal@example.com', name: 'Cristobal', lastname: 'Dominguez', nickname: 'cristobaldominguez', password: 123123, profile: 'cd.jpg', cover: 'cover_04.jpg', landscapes: 5 },
-#     { email: 'admin@example.com', name: 'Desafío', lastname: 'Latam', nickname: 'elliot', password: 123456, profile: 'elliot.jpg', cover: 'mr_robot_cover.jpeg', landscapes: 3 },
-#     { email: 'margot@example.com', name: 'Margot', lastname: 'Robbie', nickname: 'margotrobbie', password: 123456, profile: 'margot.jpg', cover: 'cover_01.jpg', landscapes: 3 },
-#     { email: 'ryan@example.com', name: 'Ryan', lastname: 'Reynolds', nickname: 'ryanreynolds', password: 123456, profile: 'ryan.jpg', cover: 'cover_05.jpg', landscapes: 3 },
-#     { email: 'barack@example.com', name: 'Barack', lastname: 'Obama', nickname: 'barackobama', password: 123456, profile: 'barack.jpg', cover: 'cover_03.jpg', landscapes: 3 },
-#     { email: 'michael@example.com', name: 'Michael', lastname: 'Jackson', nickname: 'michaeljackson', password: 123456, profile: 'michael.jpg', cover: 'cover_06.jpg', landscapes: 3 },
-#     { email: 'bruce@example.com', name: 'Bruce', lastname: 'Willis', nickname: 'brucewillis', password: 123456, profile: 'bruce.jpg', cover: 'cover_02.jpg', landscapes: 3 }
-# ]
-# ​
-# puts 'Creating Users'
-# users.each do |user|
-#     current_user = User.create!(
-#         email: user[:email],
-#         name: user[:name],
-#         lastname: user[:lastname],
-#         nickname: user[:nickname],
-#         password: user[:password]
-#     )
-#     current_user.profile.attach(io: File.open("app/assets/images/profiles/#{user[:profile]}"), filename: user[:profile])
-# ​
-#     puts "se ha creado el usuario: #{current_user.name} #{current_user.lastname}"
-# end
